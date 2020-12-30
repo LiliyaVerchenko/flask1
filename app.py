@@ -19,7 +19,6 @@ class Advertisement(db.Model):
     description = db.Column(db.String(300), nullable=False)
     date = db.Column(db.DateTime, default=datetime.utcnow)
     creator = db.Column(db.String(300), nullable=False)
-    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return f'Объявление №{self.id}'
@@ -38,7 +37,7 @@ def verify_password(username, password):
             check_password_hash(users.get(username), password):
         return username
 
-
+# создание объявления
 @app.route('/create-advertisement', methods=['POST', 'GET'])
 @auth.login_required
 def create_advertisement():
@@ -59,18 +58,21 @@ def create_advertisement():
         return render_template('create-advertisement.html')
 
 
+# просмотр списка объявлений
 @app.route('/advertisements')
 def advertisements():
     advertisements = Advertisement.query.order_by(Advertisement.date.desc()).all()
     return render_template('advertisements.html', advertisements=advertisements)
 
 
+# просмотр страницы объявления
 @app.route('/advertisements/<int:id>')
 def advertisements_page(id):
     advertisement = Advertisement.query.get(id)
     return render_template('advertisement_page.html', advertisement=advertisement)
 
 
+# удаление объявления
 @app.route('/advertisements/<int:id>/delete')
 @auth.login_required
 def advertisement_delete(id):
@@ -87,6 +89,7 @@ def advertisement_delete(id):
         return 'Удалять может только владелец объявления'
 
 
+# редактирование объявления
 @app.route('/advertisements/<int:id>/update', methods=['GET', 'POST'])
 @auth.login_required
 def update_advertisement(id):
