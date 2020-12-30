@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Редактировать объявление
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Редактировать объявление</h1>
+    <form method="post">
+        <input type="text" name="title" id="title" class="form-control" value="{{ advertisement.title }}" placeholder="Введите название"><br>
+        <textarea name="description" id="description" class="form-control" placeholder="Введите текст объявления">{{ advertisement.description }}</textarea><br>
+        <input type="submit" class="btn btn-success" value="Обновить">
+    </form>
+</div>>
+{% endblock %}

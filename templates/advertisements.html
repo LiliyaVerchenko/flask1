@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Все объявления на сайте
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <h1>Объявления</h1>
+    {% if advertisements|length > 0 %}
+        {% for advertisement in advertisements %}
+        <div class="alert">
+            <h2>{{ advertisement.title }}</h2>
+            <p>{{ advertisement.description }}</p>
+            <p>Создатель: {{ advertisement.creator }}</p>
+            <p><b>Дата: {{ advertisement.date.date() }}</b></p>
+            <a href="/advertisements/{{ advertisement.id }}" class="btn">Подробнее</a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>На данный момент объявлений нет</p>
+    {% endif %}
+</div>>
+{% endblock %}

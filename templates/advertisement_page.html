@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ advertisement.title }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ advertisement.title }}</h1>
+    <div class="alert">
+        <p>{{ advertisement.description }}</p>
+        <p>Создатель: {{ advertisement.creator }}</p>
+        <p><b>Дата: {{ advertisement.date.date() }}</b></p>
+        <a href="/advertisements/{{ advertisement.id }}/delete" class="btn btn-danger">Удалить</a>
+        <a href="/advertisements/{{ advertisement.id }}/update" class="btn btn-success">Редактировать</a>
+    </div>
+
+</div>>
+{% endblock %}
